@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-// 내붖덕으로 관리하는 공통코드를 요청을 통해 확인하고 싶을 때 사용
+// 내부적으로 관리하는 공통코드를 요청을 통해 확인하고 싶을 때 사용
 public class EnumMapper {
     private Map<String, List<EnumMapperValue>> factory = new LinkedHashMap<>();
 

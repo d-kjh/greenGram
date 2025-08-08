@@ -14,7 +14,7 @@ public class EnumConvertUtils {
     // 리턴타입이 Enum이어야 하고 EnumMapperType을 상속받은 Enu이어야 한다.
     // enumClass는 Enum타입이어야 한다
     public static <E extends Enum<E> & EnumMapperType> E ofCode(Class<E> enumClass, String code){
-        if (StringUtils.isBlank(code)) {return null;} //code 매개변수가 null이거나 빈칸인 경우 return null 처리
+        if (StringUtils.isBlank(code)) {return null;} // code 매개변수가 null이거나 빈칸인 경우 return null 처리
 
         // Enum에 있는 값 중 매개변수 code와 같은 값을 찾아 리턴하기 위함. 근데 같은게 없으면 return null
         return EnumSet.allOf(enumClass).stream() // enum을 Stream화 하기 위함

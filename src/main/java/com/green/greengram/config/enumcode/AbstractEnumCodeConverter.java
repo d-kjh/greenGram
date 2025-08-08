@@ -29,5 +29,4 @@ implements AttributeConverter<E, String> {
         }
         return EnumConvertUtils.ofCode(targetEnumClass, dbData);
     }
-
 }
