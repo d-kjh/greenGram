@@ -1,6 +1,9 @@
 package com.green.greengram.application.feed;
 
+import com.green.greengram.application.feed.model.FeedGetDto;
+import com.green.greengram.application.feed.model.FeedGetRes;
 import com.green.greengram.application.feed.model.FeedPostReq;
+import com.green.greengram.application.feed.model.FeedPostRes;
 import com.green.greengram.config.util.ImgUploadManager;
 import com.green.greengram.entity.Feed;
 import com.green.greengram.entity.User;
@@ -17,8 +20,9 @@ import java.util.List;
 public class FeedService {
     private final FeedRepository feedRepository;
     private final ImgUploadManager imgUploadManager;
+    private final FeedMapper feedMapper;
 
-    public void postFeed(long signedUserId, FeedPostReq req, List<MultipartFile> pics) {
+    public FeedPostRes postFeed(long signedUserId, FeedPostReq req, List<MultipartFile> pics) {
         User writerUser = new User();
         writerUser.setUserId(signedUserId);
 
@@ -28,10 +32,16 @@ public class FeedService {
                 .contents(req.getContents())
                 .build();
 
-        feedRepository.save(feed); // feed객체는 영속성을 같는다
+        feedRepository.save(feed); // feed 객체는 영속성을 같는다
 
         List<String> fileNames = imgUploadManager.saveFeedPics(feed.getFeedId(), pics);
 
         feed.addFeedPics(fileNames);
+
+        return new FeedPostRes(feed.getFeedId(), fileNames);
+    }
+
+    public List<FeedGetRes> getFeedList(FeedGetDto dto) {
+        return feedMapper.findAllLimitedTo(dto);
     }
 }

@@ -12,8 +12,8 @@ import java.util.List;
 @Getter
 public class UserSignUpReq {
     @NotNull(message = "아이디는 필수로 입력하셔야 합니다.")
-    @Pattern(regexp = "^[A-Za-z0-9_]{4,20}$",
-            message = "아이디는 영어, 숫자, 언더바로만 4~20자까지 가능합니다.")
+    @Pattern(regexp = "^[A-Za-z0-9_]{4,10}$",
+            message = "아이디는 영어, 숫자, 언더바로만 4~10자까지 가능합니다.")
     private String uid;
 
     @NotNull(message = "비밀번호는 필수로 입력하셔야 합니다.")
