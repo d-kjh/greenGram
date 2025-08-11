@@ -13,8 +13,9 @@ public class FeedGetRes {
     private String location;
     private String createdAt;
     private long writerUserId;
-    private String uid;
+    private String writerUid;
     private String writerNickName;
     private String writerPic;
+    private int isLike; // 0 : 좋아요 안함, 1 : 좋아요 함
     private List<String> pics;
 }

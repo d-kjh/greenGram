@@ -22,8 +22,8 @@ public class UserSignUpReq {
             message = "비밀번호는 대소문자, 숫자, 특수문자를 포함하여 4자 이상이어야 합니다.")
     private String upw;
 
-    @Pattern(regexp = "^[가-힣]{2,10}$",
-            message = "닉네임은 한글로 2~10자까지 가능합니다.")
+    @Pattern(regexp = "^[가-힣a-zA-Z]{2,15}$",
+            message = "닉네임은 한글, 영어로 2~15자까지 가능합니다.")
     private String nickName;
 
     private List<EnumUserRole> roles;

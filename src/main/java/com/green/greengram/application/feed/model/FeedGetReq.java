@@ -8,15 +8,17 @@ import org.springframework.web.bind.annotation.BindParam;
 @ToString
 @Getter
 public class FeedGetReq {
-    @NotNull(message = "필수입니다")
-    @Positive // 1이상의 데이터만 가능
+    @NotNull(message = "page값은 필수입니다.")
+    @Positive
     private Integer page;
-    @NotNull(message = "필수입니다")
+
     @Min(value = 20, message = "20이상")
     @Max(value = 100, message = "100이하")
+    @NotNull(message = "row_per_page값은 필수입니다.")
     private Integer rowPerPage;
 
-    public FeedGetReq(Integer page,@BindParam("row_per_page") Integer rowPerPage) {
+    public FeedGetReq(Integer page
+            ,  @BindParam("row_per_page") Integer rowPerPage) {
         this.page = page;
         this.rowPerPage = rowPerPage;
     }

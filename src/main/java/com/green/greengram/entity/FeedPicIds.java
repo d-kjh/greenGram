@@ -14,7 +14,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @Embeddable
 public class FeedPicIds implements Serializable {
-    private Long feedId;
+    private long feedId;
     @Column(length = 50)
     private String pic;
 }

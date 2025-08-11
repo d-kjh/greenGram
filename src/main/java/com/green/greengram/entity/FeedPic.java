@@ -14,8 +14,9 @@ public class FeedPic extends CreatedAt {
     @EmbeddedId
     private FeedPicIds feedPicIds;
 
+    //관계설정
     @ManyToOne
-    @MapsId("feedId")
     @JoinColumn(name = "feed_id")
+    @MapsId("feedId")
     private Feed feed;
 }

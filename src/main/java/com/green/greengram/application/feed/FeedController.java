@@ -32,8 +32,8 @@ public class FeedController {
     // 페이징, 피드(사진, 댓글(3개만))
     // 현재는 피드+사진만
     @GetMapping
-    public ResultResponse<?> getFeedList(@AuthenticationPrincipal UserPrincipal userPrincipal,
-                                         @Valid @ModelAttribute FeedGetReq req){
+    public ResultResponse<?> getFeedList(@AuthenticationPrincipal UserPrincipal userPrincipal
+            , @Valid @ModelAttribute FeedGetReq req) {
         log.info("get signedUserId: {}", userPrincipal.getSignedUserId());
         log.info("get req: {}", req);
         FeedGetDto feedGetDto = FeedGetDto.builder()
@@ -42,6 +42,7 @@ public class FeedController {
                 .size(req.getRowPerPage())
                 .build();
         List<FeedGetRes> result = feedService.getFeedList(feedGetDto);
-        return new ResultResponse<>(String.format("rows: %d", result.size()), result);
+        return new ResultResponse<>(String.format("rows: %d", result.size())
+                , result);
     }
 }
