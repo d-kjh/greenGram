@@ -41,14 +41,14 @@ public class JwtTokenProvider {
                 .issuer(constJwt.getIssuer())
                 .issuedAt(now) //발행일시(토큰 생성일시)
                 .expiration(new Date(now.getTime() + tokenValidityMilliSeconds)) //만료일시(토큰 만료일시)
-                .claim(constJwt.getClaimKey(), makeClaimByUserToJson(jwtUser))
+                .claim(constJwt.getClaimKey(), makeClaimByUserToJson(jwtUser)) // 커스텀 클레임
 
                 //signature
                 .signWith(secretKey)
                 .compact();
     }
-
-    public String makeClaimByUserToJson(JwtUser jwtUser) {
+    // 내부용이라 private 가능
+    private String makeClaimByUserToJson(JwtUser jwtUser) {
         try {
             return objectMapper.writeValueAsString(jwtUser);
         } catch (JsonProcessingException e){

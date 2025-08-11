@@ -30,6 +30,7 @@ public class UserController {
         return new ResultResponse<Integer>("", 1);
     }
 
+    // response는 쿠키에 AT, RT를 담기 위해 필요하다.
     @PostMapping("/sign-in")
     public ResultResponse<?> signIn(@Valid @RequestBody UserSignInReq req
             , HttpServletResponse response) {
