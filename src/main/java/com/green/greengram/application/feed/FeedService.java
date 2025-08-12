@@ -54,12 +54,18 @@ public class FeedService {
         for(FeedGetRes feedGetRes : list) {
             feedGetRes.setPics(feedMapper.findAllPicByFeedId(feedGetRes.getFeedId()));
             // startIdx : 0, size : 4
-            int START_IDX = 0;
-            int SIZE = 4;
-            FeedCommentGetReq commentReq = new FeedCommentGetReq(feedGetRes.getFeedId(), START_IDX, SIZE);
-            List<FeedCommentItem> commentList = feedCommentMapper.findAllByFeedIdLimitedTo(commentReq);
-            FeedCommentGetRes commentGetRes = new FeedCommentGetRes(commentList.size() > SIZE - 1, commentList);
-            feedGetRes.setComments(commentGetRes);
+            final int START_IDX = 0;
+            final int SIZE = 4;
+            final int MORE_COMMENT_COUNT = 4;
+            FeedCommentGetReq req = new FeedCommentGetReq(feedGetRes.getFeedId(), START_IDX, SIZE);
+            List<FeedCommentItem> commentList = feedCommentMapper.findAllByFeedIdLimitedTo(req);
+            boolean moreComment = commentList.size() == MORE_COMMENT_COUNT;
+            FeedCommentGetRes feedCommentGetRes = new FeedCommentGetRes(moreComment, commentList);
+            feedGetRes.setComments(feedCommentGetRes);
+
+            if (moreComment) { // 마지막 댓글 삭제
+                commentList.remove(MORE_COMMENT_COUNT - 1);
+            }
         }
         return list;
     }
