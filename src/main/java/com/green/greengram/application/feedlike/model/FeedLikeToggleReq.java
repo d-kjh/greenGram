@@ -1,4 +1,4 @@
-package com.green.greengram.application.feedLike.model;
+package com.green.greengram.application.feedlike.model;
 
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;

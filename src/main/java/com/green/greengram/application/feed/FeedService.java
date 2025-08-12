@@ -4,6 +4,10 @@ import com.green.greengram.application.feed.model.FeedGetDto;
 import com.green.greengram.application.feed.model.FeedGetRes;
 import com.green.greengram.application.feed.model.FeedPostReq;
 import com.green.greengram.application.feed.model.FeedPostRes;
+import com.green.greengram.application.feedcomment.FeedCommentMapper;
+import com.green.greengram.application.feedcomment.model.FeedCommentGetReq;
+import com.green.greengram.application.feedcomment.model.FeedCommentGetRes;
+import com.green.greengram.application.feedcomment.model.FeedCommentItem;
 import com.green.greengram.config.util.ImgUploadManager;
 import com.green.greengram.entity.Feed;
 import com.green.greengram.entity.User;
@@ -20,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FeedService {
     private final FeedMapper feedMapper;
+    private final FeedCommentMapper feedCommentMapper;
     private final FeedRepository feedRepository;
     private final ImgUploadManager imgUploadManager;
 
@@ -45,9 +50,16 @@ public class FeedService {
 
     public List<FeedGetRes> getFeedList(FeedGetDto dto) {
         List<FeedGetRes> list = feedMapper.findAllLimitedTo(dto);
-        // 각 피드에서 사진 가져오기
+        // 각 피드에서 사진 가져오기, 댓글 가져오기(4개만)
         for(FeedGetRes feedGetRes : list) {
             feedGetRes.setPics(feedMapper.findAllPicByFeedId(feedGetRes.getFeedId()));
+            // startIdx : 0, size : 4
+            int START_IDX = 0;
+            int SIZE = 4;
+            FeedCommentGetReq commentReq = new FeedCommentGetReq(feedGetRes.getFeedId(), START_IDX, SIZE);
+            List<FeedCommentItem> commentList = feedCommentMapper.findAllByFeedIdLimitedTo(commentReq);
+            FeedCommentGetRes commentGetRes = new FeedCommentGetRes(commentList.size() > SIZE - 1, commentList);
+            feedGetRes.setComments(commentGetRes);
         }
         return list;
     }

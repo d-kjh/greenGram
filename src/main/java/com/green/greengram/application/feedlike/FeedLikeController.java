@@ -1,6 +1,6 @@
-package com.green.greengram.application.feedLike;
+package com.green.greengram.application.feedlike;
 
-import com.green.greengram.application.feedLike.model.FeedLikeToggleReq;
+import com.green.greengram.application.feedlike.model.FeedLikeToggleReq;
 import com.green.greengram.config.model.ResultResponse;
 import com.green.greengram.config.model.UserPrincipal;
 import jakarta.validation.Valid;

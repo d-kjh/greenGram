@@ -1,6 +1,6 @@
-package com.green.greengram.application.feedLike;
+package com.green.greengram.application.feedlike;
 
-import com.green.greengram.application.feedLike.model.FeedLikeToggleReq;
+import com.green.greengram.application.feedlike.model.FeedLikeToggleReq;
 import com.green.greengram.entity.Feed;
 import com.green.greengram.entity.FeedLike;
 import com.green.greengram.entity.FeedLikeIds;
