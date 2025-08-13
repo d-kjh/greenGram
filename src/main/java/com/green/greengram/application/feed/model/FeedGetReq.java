@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.BindParam;
 @ToString
 @Getter
 public class FeedGetReq {
-    @NotNull(message = "page값은 필수입니다.")
+    @NotNull(message = "page 값은 필수입니다.")
     @Positive
     private Integer page;
 

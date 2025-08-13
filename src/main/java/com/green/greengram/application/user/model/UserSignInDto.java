@@ -9,6 +9,4 @@ import lombok.Getter;
 public class UserSignInDto {
     private UserSignInRes userSignInRes; // 응답용
     private JwtUser jwtUser; // Jwt 발행 때 사용
-
-
 }

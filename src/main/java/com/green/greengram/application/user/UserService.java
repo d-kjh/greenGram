@@ -1,9 +1,6 @@
 package com.green.greengram.application.user;
 
-import com.green.greengram.application.user.model.UserSignInDto;
-import com.green.greengram.application.user.model.UserSignInReq;
-import com.green.greengram.application.user.model.UserSignInRes;
-import com.green.greengram.application.user.model.UserSignUpReq;
+import com.green.greengram.application.user.model.*;
 import com.green.greengram.config.enumcode.model.EnumUserRole;
 import com.green.greengram.config.model.JwtUser;
 import com.green.greengram.config.util.ImgUploadManager;
@@ -77,5 +74,9 @@ public class UserService {
                 .jwtUser(jwtUser) // 토큰 제작에 필요
                 .userSignInRes(userSignInRes) // FE에게 전달할 데이터
                 .build();
+    }
+
+    public UserProfileGetRes getProfileUser(UserProfileGetDto dto) {
+        return null;
     }
 }
