@@ -3,8 +3,8 @@
 <mapper namespace="com.green.greengram.application.user.UserMapper">
     <select id="findProfileByUserId">
         SELECT u.user_id, u.pic, u.created_at, u.uid, u.nick_name
-        , COUNT(distinct f.feed_id) AS feedCount
-        , count(distinct fl.feed_id) AS allFeedLikeCount
+        , COUNT(DISTINCT f.feed_id) AS feedCount
+        , COUNT(fl.feed_id) AS allFeedLikeCount
         FROM user u
         INNER JOIN feed f ON f.writer_user_id = u.user_id
         LEFT JOIN feed_like fl ON fl.feed_id = f.feed_id

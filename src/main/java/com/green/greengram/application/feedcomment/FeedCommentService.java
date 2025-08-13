@@ -59,5 +59,6 @@ public class FeedCommentService {
         if (feedComment.getUser().getUserId() != userId) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "본인이 작성한 댓글이 아닙니다.");
         }
+        feedCommentRepository.deleteById(feedCommentId);
     }
 }
