@@ -40,8 +40,17 @@ public class ImgUploadManager {
         return randomFileNames;
     }
 
+    private String makeProfileDirectoryPath(long userId){
+        return String.format("%s%s/%d", constFile.getUploadDirectory(),constFile.getProfilePic(), userId);
+    }
 
-    //저장한 파일명 리턴
+    // 폴더 삭제
+    public void removeProfileDirectory(long userId) {
+        String directory = makeProfileDirectoryPath(userId);
+        myFileUtils.deleteFolder(directory, true);
+    }
+
+    // 저장한 파일명 리턴
     public String saveProfilePic(long id, MultipartFile profilePicFile) {
         //폴더 생성
         String directory = String.format("%s/%s/%d", constFile.getUploadDirectory(), constFile.getProfilePic(), id);

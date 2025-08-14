@@ -1,19 +1,20 @@
 package com.green.greengram.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Getter
 @EqualsAndHashCode
 public class UserFollow extends CreatedAt{
-
     @EmbeddedId
     private UserFollowIds userFollowIds;
 
+    //관계설정(FK)
     @ManyToOne
     @MapsId("fromUserId")
     @JoinColumn(name = "from_user_id")

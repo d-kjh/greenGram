@@ -20,25 +20,26 @@ public class FeedCommentController {
 
     @PostMapping
     public ResultResponse<?> postFeedComment(@AuthenticationPrincipal UserPrincipal userPrincipal
-                                            , @Valid @RequestBody FeedCommentPostReq req) {
+            , @Valid @RequestBody FeedCommentPostReq req) {
         log.info("signedUserId: {}", userPrincipal.getSignedUserId());
-        log.info("post req: {}", req);
+        log.info("req: {}", req);
         long feedCommentId = feedCommentService.postFeedComment(userPrincipal.getSignedUserId(), req);
-        return new ResultResponse<>("댓글 작성 완료", feedCommentId);
+        return new ResultResponse<>("댓글 등록 완료", feedCommentId);
     }
 
     @GetMapping
     public ResultResponse<?> getFeedCommentList(@Valid @ModelAttribute FeedCommentGetReq req) {
         log.info("get req: {}", req);
         FeedCommentGetRes feedCommentGetRes = feedCommentService.getFeedList(req);
-        return new ResultResponse<>(String.format("rows: %d", feedCommentGetRes.getCommentList().size()), feedCommentGetRes);
+        return new ResultResponse<>(String.format("rows: %d", feedCommentGetRes.getCommentList().size())
+                , feedCommentGetRes);
     }
 
     @DeleteMapping
     public ResultResponse<?> deleteFeedComment(@AuthenticationPrincipal UserPrincipal userPrincipal
-                                              , @RequestParam("feed_comment_id") Long feedCommentId) {
+            , @RequestParam("feed_comment_id") Long feedCommentId) {
 
         feedCommentService.deleteFeedComment(userPrincipal.getSignedUserId(), feedCommentId);
-        return new ResultResponse<>("댓글을 삭제했습니다", null);
+        return new ResultResponse<>("댓글을 삭제하였습니다.", null);
     }
 }
