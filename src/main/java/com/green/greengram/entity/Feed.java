@@ -6,12 +6,12 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Entity
 public class Feed extends UpdatedAt{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class Feed extends UpdatedAt{
     @Column(length = 30)
     private String location;
 
-    @Column(length = 1000)
+    @Column(length = 1_000)
     private String contents;
 
     // 양방향 관계 설정
@@ -33,17 +33,15 @@ public class Feed extends UpdatedAt{
     private List<FeedPic> feedPicList = new ArrayList<>(1);
 
     public void addFeedPics(List<String> picFileNames) {
-
-
-        for (String picFileName : picFileNames) {
+        for(String picFileName : picFileNames) {
             FeedPicIds feedPicIds = FeedPicIds.builder()
-                                              .feedId(this.feedId)
-                                              .pic(picFileName)
-                                              .build();
+                    .feedId(this.feedId)
+                    .pic(picFileName)
+                    .build();
             FeedPic feedPic = FeedPic.builder()
-                                     .feedPicIds(feedPicIds)
-                                     .feed(this)
-                                     .build();
+                    .feedPicIds(feedPicIds)
+                    .feed(this)
+                    .build();
             this.feedPicList.add(feedPic);
         }
     }

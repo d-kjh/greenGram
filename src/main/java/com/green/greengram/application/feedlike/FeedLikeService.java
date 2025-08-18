@@ -22,7 +22,7 @@ public class FeedLikeService {
                 .build();
 
         FeedLike feedLike = feedLikeRepository.findById(feedLikeIds).orElse(null);
-        if (feedLike == null) {  // 좋아요가 아닌 상태 >> 좋아요인 상태로 변경
+        if(feedLike == null) { //좋아요가 아닌 상태   >>   좋아요인 상태로 변경
             Feed feed = Feed.builder()
                     .feedId(req.getFeedId())
                     .build();
@@ -31,7 +31,7 @@ public class FeedLikeService {
             user.setUserId(signedUserId);
 
             FeedLike feedLikeSave = FeedLike.builder()
-                    .feedLikeIds(feedLikeIds)
+                    .id(feedLikeIds)
                     .user(user)
                     .feed(feed)
                     .build();
@@ -39,7 +39,7 @@ public class FeedLikeService {
             feedLikeRepository.save(feedLikeSave);
             return true;
         }
-        // 좋아요인 상태
+        //좋아요인 상태
         feedLikeRepository.delete(feedLike);
         return false;
     }

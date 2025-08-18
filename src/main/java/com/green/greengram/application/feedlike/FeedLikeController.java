@@ -1,5 +1,6 @@
 package com.green.greengram.application.feedlike;
 
+
 import com.green.greengram.application.feedlike.model.FeedLikeToggleReq;
 import com.green.greengram.config.model.ResultResponse;
 import com.green.greengram.config.model.UserPrincipal;
@@ -21,10 +22,10 @@ public class FeedLikeController {
 
     @PostMapping
     public ResultResponse<?> toggle(@AuthenticationPrincipal UserPrincipal userPrincipal
-                                  , @Valid @RequestBody FeedLikeToggleReq req) {
+            , @Valid @RequestBody FeedLikeToggleReq req) {
         log.info("signedUserId: {}", userPrincipal.getSignedUserId());
-        log.info("req={}", req);
+        log.info("req: {}", req);
         boolean result = feedLikeService.toggle(userPrincipal.getSignedUserId(), req);
-        return new ResultResponse<>(result ? "좋아요" : "좋아요 취소",result); // true: 좋아요 처리, false: 좋아요 취소
+        return new ResultResponse<>(result ? "좋아요 처리" : "좋아요 취소", result); //true: 좋아요 처리, false: 좋아요 취소
     }
 }

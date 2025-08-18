@@ -3,15 +3,14 @@ package com.green.greengram.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@Entity
-public class FeedLike extends CreatedAt{
+public class FeedLike extends CreatedAt {
     @EmbeddedId
-    private FeedLikeIds feedLikeIds;
+    private FeedLikeIds id;
 
     @ManyToOne
     @MapsId("feedId")

@@ -67,4 +67,13 @@ public class UserController {
         String savedFileName = userService.pathProfilePic(userPrincipal.getSignedUserId(), pic);
         return new ResultResponse<>("프로필 유저 정보", savedFileName);
     }
+
+    // 삭제 프로필 있는 폴더를 삭제하고
+    @DeleteMapping("/profile/pic")
+    public ResultResponse<?> deleteProfilePic(@AuthenticationPrincipal UserPrincipal userPrincipal
+                                            ) {
+        userService.deleteProfilePic(userPrincipal.getSignedUserId());
+        return new ResultResponse<>("프로필 사진 삭제", null);
+    }
+
 }
